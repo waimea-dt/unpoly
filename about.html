@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Unpoly - Introduction</title>
+
+    <link rel="icon" href="images/unpoly-logo.png" type="image/png">
+    <link rel="icon" href="images/unpoly-logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/unpoly.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/unpoly.min.js"></script>
+</head>
+
+<body>
+    <include src="includes/header.html" data-sub-title="Introduction"></include>
+
+    <main>
+
+        <h1>Introduction to Unpoly</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>What is Unpoly and What Does it Do?</h2>
+
+            <p>In standard, plain HTML only <code class="language-html">&lt;a&gt;</code> and <code class="language-html">&lt;form&gt;</code> elements can trigger <strong>HTTP GET and POST requests</strong>, and HTML retrieved via these requests triggers a full page load.</p>
+
+            <p>Unpoly extends standard HTML so that <em>any HTML element</em> of a web page can trigger GET and POST requests (and other types too). Unpoly directs where the returned HTML should be placed on the page. And all this happens without a page reload.</p>
+
+            <img src="images/unpoly-process.png" alt="The Unpoly process">
+
+            <p><em>In response to these requests, the server only needs to return standard HTML/Unpoly code, and this can be handled by any server-side scripting system: PHP, Node.js Django, etc.</em></p>
+
+            <p>One of the key principals behind Unpoly is that the server should return the data required and also any actions that can be performed on it.</p>
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Some Simple Unpoly Demos</h2>
+
+            <p>Try interacting with these demos to see Unpoly in action...</p>
+
+            <p><em>Note that the page content is updated without a page reload.</em></p>
+
+
+            <h3>Demo 1 - GET Data from the Server</h3>
+
+            <p>Here, each click of a button issues a request to the server for a new data record.</p>
+
+            <div hx-trigger="load"
+                 hx-get="demo/contact/1.html"
+                 hx-target="this"
+                 class="demo small"></div>
+
+            <h3>Demo 2 - Edit Data and POST to the Server</h3>
+
+            <p>Here, some data is shown. When the Edit button is clicked, the data is replaced by a form, and when this is submitted the updated data is shown.</p>
+
+            <div hx-trigger="load"
+                 hx-get="demo/form/data.html"
+                 hx-target="this"
+                 class="demo small"></div>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>How Does the First Demo Work?</h2>
+
+            <h3>The HTMX Code in the Page</h3>
+
+            <p>The <code class="language-html">&lt;div&gt;</code> in this demo initially has no content.</p>
+
+            <p>The HTMX attributes specify that when the <strong>page loads</strong>, HTML content should be retrieved from the <strong>/contact</strong> URL via a <strong>GET request</strong>, and be placed inside the div...</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="load"
+                     hx-get="/contact?id=1"
+                     hx-target="this">
+                </div>
+            --></code></pre>
+
+            <p><em>The <strong>hx-target</strong> settings means that this div will be the target of all future content swaps too.</em></p>
+
+            <h3>Server Responds with HTML for a Contact</h3>
+
+            <p>When the server receives the above GET request it uses the supplied ID value to respond with the appropriate HTML. The HTML includes the buttons (with HTMX attributes) required to load the next/previous records. For examnple, here is record #2...</p>
+
+            <pre><code class="language-html"><!--
+                <header>
+                    <h2>Sally Toothbrush</h2>
+                    <p>2/3</p>
+                </header>
+
+                <dl>
+                    <dt>Tel</dt>
+                    <dd>021 666 6666</dd>
+                    <dt>Email</dt>
+                    <dd>sally@teeth.co.nz</dd>
+                </dl>
+
+                <footer>
+                    <button hx-get="/contact?id=1">Prev</button>
+                    <button hx-get="/contact?id=3">Next</button>
+                </footer>
+            --></code></pre>
+
+            <p>When the user clicks one of the <strong>buttons</strong>, another <strong>GET request</strong> is sent to the server and a new record replaces the last.</p>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>How Does the Second Demo Work?</h2>
+
+            <h3>The HTMX Code in the Page</h3>
+
+            <p>The <code class="language-html">&lt;div&gt;</code> in this demo initially has no content.</p>
+
+            <p>The HTMX attributes specify that when the <strong>page loads</strong>, HTML content should be retrieved from the <strong>/user</strong> URL via a <strong>GET request</strong>, and be placed inside the div...</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="load"
+                     hx-get="/user"
+                     hx-target="this">
+                </div>
+            --></code></pre>
+
+            <p><em>The <strong>hx-target</strong> settings means that this div will be the target of all future content swaps too.</em></p>
+
+            <h3>Server Responds with User Data HTML</h3>
+
+            <p>When the server receives the above GET request it responds with the appropriate HTML content, including an Edit button and various HTMX attributes required to swap in the edit form...</p>
+
+            <pre><code class="language-html"><!--
+                <dl>
+                    <dt>Name</dt>
+                    <dd>Sally Toothbrush</dd>
+                    <dt>Tel</dt>
+                    <dd>021 666 6666</dd>
+                    <dt>Email</dt>
+                    <dd>sally@teeth.co.nz</dd>
+                </dl>
+
+                <button hx-get="/form">Edit</button>
+            --></code></pre>
+
+            <p>When the user clicks the <strong>Edit button</strong>, another <strong>GET request</strong> is sent to the server, this time for the edit form...</p>
+
+            <h3>Server Responds with User Edit Form</h3>
+
+            <p>The server responds with the HTML for the edit form which is pre-populated with the currect user data...</p>
+
+            <pre><code class="language-html"><!--
+                <form hx-post="/update">
+                    <label>Name</label>
+                    <input name="name" value="Sally Toothbrush">
+                    <label>Tel</label>
+                    <input name="tel" value="021 666 6666">
+                    <label>Email</label>
+                    <input name="email" value="sally@teeth.co.nz">
+
+                    <input type="submit" value="Save">
+                </form>
+            --></code></pre>
+
+            <p>When this form is submitted, an <strong>HTTP POST request</strong> is sent to the <strong>/update</strong> URL, which includes the edited user data...</p>
+
+            <h3>Server Updates and Responds with User Data</h3>
+
+            <p>When the server recieves the POST request, it processes the update and then responds with the HTML for the updated user data, and we're back to the start.</p>
+
+        </article>
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+</body>
+
+</html>

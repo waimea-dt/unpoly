@@ -1,0 +1,93 @@
+:root {
+    --code-text-col: #ccc;
+    --code-back-col: #12181b;
+    --code-comment-col: #fff7;
+    --code-newline-col: #ff0;
+    --code-cursor-col: #ff0;
+    --code-system-col: #69c;
+    --code-input-col: #9c0;
+    --code-error-col: #f30;
+}
+
+
+/* CODE LISTS
+*************************************************************/
+
+dl.code-list {
+    padding-left: var(--padding-large);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--padding-small);
+    margin: 0;
+    width: 100%;
+}
+
+dl.code-list dd {
+    margin-left: 0;
+}
+
+dl.code-list code {
+    padding: 0.05em 0.3em;
+    border: 1px solid var(--border-col);
+    display: inline-block;
+    min-width: 2.5em;
+    text-align: center;
+}
+
+
+/* CODE PREVIEW
+*************************************************************/
+
+code[class*="language-"],
+pre[class*="language-"] {
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.3;
+    color: var(--code-text-col);
+    background-color: var(--code-back-col);
+}
+
+pre[class*="language-"] {
+    margin: 0;
+    padding: 0.5em 1em;
+    border: 1px solid var(--border-col);
+}
+
+.token.comment {
+    font-style: normal;
+    color: var(--code-comment-col);
+}
+
+.newline,
+.token.newline {
+    color: var(--code-newline-col);
+}
+
+.token.input {
+    color: var(--code-input-col);
+}
+
+.token.system {
+    color: var(--code-system-col);
+    font-style: italic;
+}
+
+.token.error {
+    color: var(--code-error-col);
+    font-style: italic;
+}
+
+.token.hide {
+    display: none;
+}
+
+.token.cursor {
+    color: var(--code-cursor-col);
+    animation: flash 500ms linear infinite alternate;
+}
+
+@keyframes flash {
+    0% { color: var(--code-cursor-col); }
+    100% { color: transparent; }
+}
+

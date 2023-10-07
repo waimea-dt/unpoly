@@ -1,0 +1,7 @@
+<h1 class="triggered" id="key-status">Pressed</h1>
+
+<p>This message was loaded dynamically via HTMX due to a repeating <strong>keyup</strong> trigger</p>
+
+<script>
+    document.getElementById('key-status').innerText = 'Pressed ' + sessionStorage.getItem('demo-key-press');
+</script>

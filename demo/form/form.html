@@ -1,0 +1,32 @@
+<form hx-post="demo/form/data.html">
+
+    <label>Name</label>
+    <input id="demo-form-name" name="name" value="Sally Toothbrush">
+
+    <label>Tel</label>
+    <input id="demo-form-tel" name="tel" value="021 666 6666">
+
+    <label>Email</label>
+    <input id="demo-form-email" name="email" value="sally@teeth.co.nz">
+
+    <input type="submit" onclick="saveData();" value="Save">
+
+    <script>
+        function saveData() {
+            const name  = document.getElementById('demo-form-name');
+            const tel   = document.getElementById('demo-form-tel');
+            const email = document.getElementById('demo-form-email');
+            sessionStorage.setItem('demo-form-name',  name.value );
+            sessionStorage.setItem('demo-form-tel',   tel.value );
+            sessionStorage.setItem('demo-form-email', email.value );
+        }
+
+        if (sessionStorage.getItem('demo-form-name'))
+            document.getElementById('demo-form-name').value  = sessionStorage.getItem('demo-form-name');
+        if (sessionStorage.getItem('demo-form-tel'))
+            document.getElementById('demo-form-tel').value   = sessionStorage.getItem('demo-form-tel');
+        if (sessionStorage.getItem('demo-form-email'))
+            document.getElementById('demo-form-email').value = sessionStorage.getItem('demo-form-email');
+    </script>
+
+</form>

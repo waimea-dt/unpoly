@@ -1,0 +1,24 @@
+<dl class="data-list">
+
+    <dt>Name</dt>
+    <dd id="demo-form-name">Sally Toothbrush</dd>
+
+    <dt>Tel</dt>
+    <dd id="demo-form-tel">021 666 6666</dd>
+
+    <dt>Email</dt>
+    <dd id="demo-form-email">sally@teeth.co.nz</dd>
+
+</dl>
+
+<button hx-get="demo/form/form.html">Edit</button>
+
+<script>
+    if (sessionStorage.getItem('demo-form-name'))
+        document.getElementById('demo-form-name').innerText  = sessionStorage.getItem('demo-form-name');
+    if (sessionStorage.getItem('demo-form-tel'))
+        document.getElementById('demo-form-tel').innerText   = sessionStorage.getItem('demo-form-tel');
+    if (sessionStorage.getItem('demo-form-email'))
+        document.getElementById('demo-form-email').innerText = sessionStorage.getItem('demo-form-email');
+</script>
+

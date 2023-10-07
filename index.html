@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Unpoly</title>
+
+    <link rel="icon" href="images/unpoly-logo.png" type="image/png">
+    <link rel="icon" href="images/unpoly-logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/unpoly.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/unpoly.min.js"></script>
+</head>
+
+<body>
+    <include src="includes/header.html" data-sub-title=""></include>
+
+    <main id="home">
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <include src="includes/intro.html"></include>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <include src="includes/nav.html"></include>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example - Retrieve and Show Data</h2>
+
+            <p>Here, each click of a button issues a request to the server for a new data record.</p>
+
+            <div hx-trigger="load" hx-get="demo/contact/1.html" hx-target="this" class="demo small"></div>
+
+        </article>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example - Edit Data in Place</h2>
+
+            <p>Here, some user data is shown. When the Edit button is clicked, the data is replaced by a form, and when this is submitted the updated data is shown.</p>
+
+            <div hx-trigger="load" hx-get="demo/form/data.html" hx-target="this" class="demo small"></div>
+
+        </article>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+</body>
+
+</html>

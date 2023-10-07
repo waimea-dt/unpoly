@@ -1,0 +1,12 @@
+<h1 class="triggered" id="trigger-status">Triggered...</h1>
+
+<p>This message was loaded dynamically via HTMX due to a repeating <strong>every 3s</strong> trigger</p>
+
+<script>
+    sessionStorage.setItem(
+        'demo-trigger-status',
+        sessionStorage.getItem('demo-trigger-status') == 'Triggered...' ? '... And Again' : 'Triggered...'
+    );
+
+    document.getElementById('trigger-status').innerText = sessionStorage.getItem('demo-trigger-status');
+</script>

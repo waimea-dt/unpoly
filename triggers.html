@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HTMX - Triggers</title>
+
+    <link rel="icon" href="images/unpoly-logo.png" type="image/png">
+    <link rel="icon" href="images/unpoly-logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/unpoly.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/unpoly.min.js"></script>
+</head>
+
+<body>
+    <include src="includes/header.html" data-sub-title="Triggers"></include>
+
+    <main>
+
+        <h1>HTMX Triggers (<strong>hx-trigger</strong>)</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>What Events can HTMX Respond To?</h2>
+
+            <p>Any HTML element with the <code class="language-abnf">hx-trigger="..."</code> attribute can listen for and react to events. Examples of triggers that HTMX can react to:</p>
+
+            <dl class="code-list">
+                <dt><code class="language-html">load</code></dt>
+                <dd>When the page has loaded</dd>
+
+                <dt><code class="language-html">click</code></dt>
+                <dd>When an element is clicked</dd>
+
+                <dt><code class="language-html">mouseenter</code></dt>
+                <dd>When the mouse entered an element</dd>
+
+                <dt><code class="language-html">keyup</code></dt>
+                <dd>When a key is released whilst typing</dd>
+
+                <dt><code class="language-html">revealed</code></dt>
+                <dd>When an element scrolls into view</dd>
+
+                <dt><code class="language-html">every Xs</code></dt>
+                <dd>Regularly, every X seconds</dd>
+
+            </dl>
+
+            <p>The full list, including modifiers for delays, throttling, etc. can be found <a target="_blank" href="https://htmx.org/attributes/hx-trigger/">here</a>.</p>
+
+            <p>Examples of useful modifiers:</p>
+
+            <dl class="code-list">
+                <dt><code class="language-html">once</code></dt>
+                <dd>The event will only trigger once (e.g. the first click)</dd>
+
+                <dt><code class="language-html">delay:Xs</code></dt>
+                <dd>Delay the event by X seconds</dd>
+
+                <dt><code class="language-html">changed</code></dt>
+                <dd>The event will only trigger if the value of the element (e.g. an input) has changed</dd>
+            </dl>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Page Load Trigger</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="load"</code> attribute will be triggered when the element is <strong>loaded into the page</strong>.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="load"
+                     hx-get="/message">
+                    <h1>Page Not Loaded</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, when the <strong>page loads</strong> a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will be placed into the inside of the div.</p>
+
+            <div hx-trigger="load delay:1s"
+                 hx-get="demo/messages/loaded.html"
+                 class="demo small">
+                <h1>Page Not Loaded</h1>
+            </div>
+
+
+            <p><em>Note that for the demo a delay has been added so you can see the effect. It would normally be instantaneous.</em></p>
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Click Trigger (default for most elements)</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="click"</code> attribute will be triggered when the element is <strong>clicked by the user</strong>.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="click once"
+                     hx-get="/message">
+                    <h1>Click Me!</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, when the <strong>user clicks</strong> the element for the first time (the <strong>once</strong> setting) a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will then replace the original content of the div...</p>
+
+            <div hx-trigger="click once"
+                 hx-get="demo/messages/clicked.html"
+                 class="demo small">
+                <h1>Click Me!</h1>
+            </div>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Mouse Over Trigger</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="mouseenter"</code> attribute will be triggered when the <strong>mouse hovers over</strong> the element.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="mouseenter once"
+                     hx-get="/message">
+                    <h1>Mouse Over Me!</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, when the <strong>user mouses over</strong> the element for the first time (the <strong>once</strong> setting) a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will then replace the original content of the div...</p>
+
+            <div hx-trigger="mouseenter once"
+                 hx-get="demo/messages/moused.html"
+                 class="demo small">
+                <h1>Mouse Over Me!</h1>
+            </div>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Keyboard Triggers</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="keyup"</code> attribute will be triggered when the user <strong>types on the kayboard</strong>.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="keyup from:window"
+                     hx-get="/message">
+                    <h1>Press a Key!</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, when the user <strong>presses and releases a key</strong>, a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will then replace the original content of the div...</p>
+
+            <div hx-trigger="keyup from:window"
+                 hx-get="demo/messages/key.html"
+                 class="demo small">
+                <h1>Press a Key!</h1>
+            </div>
+
+            <script>
+                document.onkeyup = (event) => {
+                    sessionStorage.setItem('demo-key-press', event.key);
+                };
+            </script>
+
+            <p><em>Note the <code class="language-abnf">from:window</code> setting... This means that the user doesn't have to be typing into a specific element for the keys to be detected - This allows for hot-key type behaviours.</em></p>
+
+            </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Revealed Trigger</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="revealed"</code> attribute will be triggered when the element is <strong>scrolled into view</strong>.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="revealed"
+                     hx-get="/message">
+                    <h1>Not in View</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, when the element <strong>scrolls into view</strong>, a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will then replace the original content of the div...</p>
+
+            <div hx-trigger="intersect threshold:1.0 delay:1s"
+                 hx-get="demo/messages/scrolled.html"
+                 class="demo small">
+                <h1>Not in View</h1>
+            </div>
+
+            <p><em>Note that for the demo a delay has been added so you can see the effect. It would normally be instantaneous.</em></p>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Regular, Timed Triggers</h2>
+
+            <p>An element with the <code class="language-abnf">hx-trigger="every Xs"</code> attribute will be triggered <strong>repeatedly, every X seconds</strong>.</p>
+
+            <pre><code class="language-html"><!--
+                <div hx-trigger="every 3s"
+                     hx-get="/message">
+                    <h1>Waiting</h1>
+                </div>
+            --></code></pre>
+
+            <p>In the above example, <strong>every 3 seconds</strong>, a <strong>GET request</strong> is sent to the <strong>/message</strong> URL. The HTML in the response will then replace the original content of the div...</p>
+
+            <div hx-trigger="every 3s"
+                 hx-get="demo/messages/every.html"
+                 class="demo small">
+                <h1>Waiting</h1>
+            </div>
+
+            <p><em>Note that for the demo a delay has been added so you can see the effect. It would normally be instantaneous.</em></p>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+</body>
+
+</html>
